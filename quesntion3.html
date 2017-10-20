@@ -1,0 +1,145 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Slide Puzzle</title>
+	<link rel="stylesheet" type="text/css" href="question3.css">
+	<script>
+		var emptybox = [1,1];
+  	var position = [[4,1,2], [5,"",3], [7,8,6]]
+  	var step = 0;
+
+		function checkWin(){
+			var cells = document.getElementById('rotation').getElementsByTagName('td');
+  		for (i = 0; i < 8; i++) {
+  			if (parseInt(cells[i].innerHTML) == i + 1){
+  				continue;
+  			}
+  			else{
+  				return false
+  			}
+  		}
+  		return true
+  	}
+
+		function move(x,y,element){
+  		empty_row = emptybox[0]
+    	empty_cell = emptybox[1]
+    	cell = y
+    	row = x
+    	abs_cell = Math.abs(cell - empty_cell)
+    	abs_row = Math.abs(row - empty_row)
+    	value =  position[x][y];
+     	if(value != ""){
+     		if((row == empty_row && abs_cell == 1) || (cell == empty_cell && abs_row == 1)){
+     			position[empty_row][empty_cell] = value;
+     			position[x][y] = ""
+     			emptybox = [x,y]
+     			for(i = 0; i < 3; i++){
+						for(j = 0; j < 3; j++){
+							document.getElementById("t" +i + j).innerHTML = position[i][j];
+						}  		
+		  		}
+		  		step += 1;
+		  		document.getElementById('step').innerHTML = step;
+
+					if (checkWin()){
+						alert("You Win!")
+						function checkTime(i) {
+		        	return (i < 10) ? "0" + i : i;
+				    }
+						var today = new Date(),
+			      h = checkTime(today.getHours());
+			      m = checkTime(today.getMinutes());
+			      s = checkTime(today.getSeconds());
+			      document.getElementById('end_time').innerHTML = h + ":" + m + ":" + s;
+					}
+				}
+			}	
+    } 
+
+    function color(x,y,element){
+    	empty_row = emptybox[0]
+    	empty_cell = emptybox[1]
+    	cell = y
+    	row = x
+    	abs_cell = Math.abs(cell - empty_cell)
+    	abs_row = Math.abs(row - empty_row)
+    	value =  position[x][y];
+     	if(value != ""){
+     		if((row == empty_row && abs_cell == 1) || (cell == empty_cell && abs_row == 1)){
+     			element.className = "gr";
+     		}
+     		else{
+     			element.className = "re";
+     		}
+     	}
+     	else{
+     		element.className = "wh";
+     	}	
+    }
+
+		window.onload = function(){
+
+			for(i = 0; i < 3; i++){
+				for(j = 0; j < 3; j++){
+					document.getElementById("t" + i + j).innerHTML = position[i][j];
+					document.getElementById("t" + i + j).className = "re";		
+				}  		
+  		}
+
+	    function checkTime(i) {
+	        return (i < 10) ? "0" + i : i;
+	    }
+      var today = new Date();
+      var h = checkTime(today.getHours());
+      var m = checkTime(today.getMinutes());
+      var s = checkTime(today.getSeconds());
+      document.getElementById('time').innerHTML = h + ":" + m + ":" + s;	
+
+			document.getElementById('step').innerHTML = step;
+ 		
+ 			document.getElementById('reset').onclick = (function () {
+    		document.location.reload();
+			});
+ 		}
+	</script>
+</head>
+<body >
+
+	<div>
+		<table id="rotation">
+			<tr>
+				<td id="t00" onclick="move(0,0,this)" onmouseover="color(0,0,this)">1</td>
+				<td id="t01" onclick="move(0,1,this)" onmouseover="color(0,1,this)">2</td>
+				<td id="t02" onclick="move(0,2,this)" onmouseover="color(0,2,this)">3</td>
+			</tr>
+			<tr>
+				<td id="t10" onclick="move(1,0,this)" onmouseover="color(1,0,this)">4</td>
+				<td id="t11" onclick="move(1,1,this)" onmouseover="color(1,1,this)">5</td>
+				<td id="t12" onclick="move(1,2,this)" onmouseover="color(1,2,this)">6</td>
+			</tr>
+			<tr>
+				<td id="t20" onclick="move(2,0,this)" onmouseover="color(2,0,this)">7</td>
+				<td id="t21" onclick="move(2,1,this)" onmouseover="color(2,1,this)">8</td>
+				<td id="t22" onclick="move(2,2,this)" onmouseover="color(2,2,this)"></td>
+			</tr>
+		</table>
+	</div>
+	<div class="footer">	
+		<button id="reset">RESET GAME</button>
+		<div class="inline">
+			<p>Moves:</p>
+			<span id="step"></span>			
+		</div>
+		<div class="inline">			
+			<p>Start Time:</p>
+			<span id="time"></span>
+		</div>
+		<div class="inline">			
+			<p>End Time:</p>
+			<span id="end_time"></span>
+		</div>
+		<br>			
+	</div>
+</body>
+</html>

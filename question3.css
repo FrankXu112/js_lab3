@@ -1,0 +1,74 @@
+table{
+	display: table;
+	vertical-align: middle;
+	position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 200px;
+  top: 0;
+  margin: auto;
+	height: 400px;
+	width: 400px;
+	border: 1px solid black;
+}
+
+td{
+	font-size: 40px;
+	text-align: center;
+	border: 1px solid silver;
+}
+td:hover{
+	cursor: pointer;
+}
+
+.gr:hover{
+	background-color: green;
+}
+
+.re:hover{
+	background-color: red;
+}
+
+.wh:hover{
+	background-color: white;
+}
+
+
+#empty{
+	border: none;
+}
+
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.footer{
+	position: relative;
+	display: table;
+	vertical-align: center;
+	left: 0;
+  right: 0;
+  bottom: 0;
+  top: 500px;
+  margin: auto;
+}
+
+p{
+	display: inline-block;
+}
+
+span{
+	display: inline-block;
+}
+
+button{
+	height: 20px;
+	width: 120px;
+	margin-bottom: 30px;
+	padding: 0;
+}
+
+
